@@ -8,6 +8,18 @@ SCRIPT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
 WITH_NODE_RAW_FS=${1:-OFF}
 
 cd $SCRIPT_DIR
+
+cp third_party/onnxruntime/cmake/external/flatbuffers/include/flatbuffers/flatbuffers.h third_party/onnxruntime/cmake/external/flatbuffers/include/flatbuffers/flatbuffers.h.bak
+
+if patch --dry-run third_party/onnxruntime/cmake/external/flatbuffers/include/flatbuffers/flatbuffers.h < flatbuffers.patch > /dev/null 2>&1; then
+    echo "Patch validation successful: Applying patch."
+    patch third_party/onnxruntime/cmake/external/flatbuffers/include/flatbuffers/flatbuffers.h < flatbuffers.patch
+    echo "Patch applied successfully."
+else
+    echo "Error: Cannot apply patch. Original file remains unchanged."
+    exit 1
+fi
+
 pushd third_party/onnxruntime/cmake/external/protobuf/cmake
 mkdir -p build
 cd build

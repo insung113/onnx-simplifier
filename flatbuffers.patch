@@ -1,0 +1,10 @@
+--- third_party/onnxruntime/cmake/external/flatbuffers/include/flatbuffers/flatbuffers.h	2025-03-26 19:02:53.895139145 +0900
++++ flatbuffers.h	2025-03-26 19:05:14.988224251 +0900
+@@ -1872,7 +1872,6 @@
+ 
+    private:
+     TableKeyComparator &operator=(const TableKeyComparator &other) {
+-      buf_ = other.buf_;
+       return *this;
+     }
+   };
