@@ -48,7 +48,7 @@ jobs:
         # set ONNXSIM_PKG_NAME to onnx-simplifier
         CIBW_ENVIRONMENT: CMAKE_ARGS="-DONNX_USE_PROTOBUF_SHARED_LIBS=OFF -DProtobuf_USE_STATIC_LIBS=ON" ONNXSIM_PKG_NAME=onnx-simplifier
         CIBW_ENVIRONMENT_WINDOWS: USE_MSVC_STATIC_RUNTIME=0 CMAKE_ARGS="-DONNX_USE_PROTOBUF_SHARED_LIBS=OFF -DProtobuf_USE_STATIC_LIBS=ON" ONNXSIM_PKG_NAME=onnx-simplifier
-    - uses: actions/upload-artifact@v3
+    - uses: actions/upload-artifact@v4
       with:
         name: python-dist
         path: ./wheelhouse/*.whl
@@ -87,7 +87,7 @@ jobs:
         python3 -c "import onnxsim; print(dir(onnxsim))"
         python3 -m pip uninstall -y onnx-simplifier
 
-    - uses: actions/upload-artifact@v3
+    - uses: actions/upload-artifact@v4
       with:
         name: python-dist
         path: dist/*.tar.gz
@@ -107,7 +107,7 @@ jobs:
     - name: Build
       run: ./build_wasm.sh
 
-    - uses: actions/upload-artifact@v3
+    - uses: actions/upload-artifact@v4
       with:
         name: wasm
         path: |
@@ -129,7 +129,7 @@ jobs:
     - name: Build
       run: ./build_wasm.sh ON
 
-    - uses: actions/upload-artifact@v3
+    - uses: actions/upload-artifact@v4
       with:
         name: wasm-with-noderawfs
         path: |
@@ -152,7 +152,7 @@ jobs:
         cmake -GNinja ..
         ninja onnxsim_bin
 
-    - uses: actions/upload-artifact@v3
+    - uses: actions/upload-artifact@v4
       with:
         name: native
         path: |
